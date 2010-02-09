@@ -1,0 +1,18 @@
+%section
+  %table
+    %th 公演名
+    %th 場所
+    %th 日付
+    %th 開始時間
+    %th 詳細
+    - @stage.each do |stage|
+      %tr
+        %td=stage.name
+        %td=stage.place
+        %td
+          %time{:datetime=>stage.start_time.to_date}
+            =l stage.start_time.to_date,:format => :long
+        %td
+          %time{:datetime=>stage.start_time}
+            =l stage.start_time,:format => :short
+        %td=stage.description
