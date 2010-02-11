@@ -9,7 +9,48 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100208153418) do
+ActiveRecord::Schema.define(:version => 20100211172816) do
+
+  create_table "continuities", :force => true do |t|
+    t.integer  "stage_id"
+    t.integer  "music_id"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "equipment", :force => true do |t|
+    t.string   "name"
+    t.float    "size"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "members", :force => true do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email"
+    t.string   "phone"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "musics", :force => true do |t|
+    t.string   "name"
+    t.integer  "time"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "positions", :force => true do |t|
+    t.integer  "continuity_id"
+    t.integer  "member_id"
+    t.integer  "equipment_id"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "stages", :force => true do |t|
     t.string   "name"

@@ -3,6 +3,7 @@
 ENV["RAILS_ENV"] ||= 'test'
 require File.dirname(__FILE__) + "/../config/environment" unless defined?(RAILS_ROOT)
 require 'rspec/rails'
+require File.expand_path(File.dirname(__FILE__) + "/blueprints")
 
 
 # Requires supporting files with custom matchers and macros, etc,
@@ -10,6 +11,9 @@ require 'rspec/rails'
 Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each {|f| require f}
 
 Rspec::Core.configure do |config|
+  config.before(:all)    { Sham.reset(:before_all)  }
+  config.before(:each)   { Sham.reset(:before_each) }
+
   # Remove this line if you don't want Rspec's should and should_not
   # methods or matchers
   require 'rspec/expectations'
@@ -21,8 +25,8 @@ Rspec::Core.configure do |config|
   #
   # config.mock_with :mocha
   # config.mock_with :flexmock
-  # config.mock_with :rr
-  config.mock_with :rspec
+  config.mock_with :rr
+  # config.mock_with :rspec
 
   # == Fixtures
   #

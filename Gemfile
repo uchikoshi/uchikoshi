@@ -18,5 +18,7 @@ gem "haml"
 gem "rspec", :group => :test, :git => "git://github.com/rspec/rspec.git"
 group :test do
   gem "rspec-rails", :git => "git://github.com/rspec/rspec-rails.git"
-#  gem "webrat"
+  gem "machinist", :git => "git://github.com/notahat/machinist.git"
+  gem "rr", :git => "git://github.com/btakita/rr.git"
+  gem "faker"
 end

@@ -1,0 +1,14 @@
+%section
+  %p= @stage.name  
+  %p
+    %time{:datetime=>@stage.start_time.to_date}
+      =l @stage.start_time.to_date,:format => :long
+  %p
+    %time{:datetime=>@stage.start_time}
+      =l @stage.start_time,:format => :short
+  %p= @stage.description
+
+%section
+  %ul
+    - @stage.musics.each do |music|
+      %li=music.name

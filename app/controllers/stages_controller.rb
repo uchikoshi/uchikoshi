@@ -1,16 +1,19 @@
 class StagesController < ApplicationController
   def index
-    @stage = Stage.order('start_time DESC')
+    scheduled
   end
   
   def past
-    index
+    @stages = Stage.past(Date.today)
     render :index
   end
 
   def scheduled
-    index
+    @stages = Stage.scheduled(Date.today)
     render :index
   end
 
+  def show
+    @stage = Stage.find(params[:id])
+  end
 end
