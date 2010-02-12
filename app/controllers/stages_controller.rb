@@ -15,5 +15,6 @@ class StagesController < ApplicationController
 
   def show
     @stage = Stage.find(params[:id])
+    @members = Member.cast(@stage.continuities.map(&:id))
   end
 end

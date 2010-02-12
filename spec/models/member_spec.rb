@@ -2,21 +2,28 @@
 require 'spec_helper'
 
 describe Member do
-  before(:all) do
-    Member.blueprint { }
-    Continuity.blueprint { }
-    continuity = Continuity.make
-    Position.blueprint do 
-      member
-      continuity {continuity}
-    end
-    3.times { Position.make }
-    3.times { Position.make({:continuity => Continuity.make }) }
-    member = Member.make
-    3.times { Position.make({:member => member }) }
-  end
 
   context ".cast" do 
+    before(:all) do
+      Member.blueprint { }
+      Continuity.blueprint { }
+      continuity = Continuity.make
+      Position.blueprint do 
+        member
+        continuity {continuity}
+      end
+      3.times { Position.make }
+      3.times { Position.make({:continuity => Continuity.make }) }
+      member = Member.make
+      3.times { Position.make({:member => member }) }
+    end
+
+    after(:all) do 
+      Member.delete_all
+      Continuity.delete_all
+      Position.delete_all
+    end
+
     it "出演者が取得できること" do 
       members = Member.cast(1)
       members.should have(4).items

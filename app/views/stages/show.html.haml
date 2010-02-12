@@ -13,3 +13,9 @@
     %th 
     - @stage.musics.each do |music|
       %th=music.name 
+    - @members.each do |member|
+      %tr
+        %td=member.first_name
+        - @stage.continuities.each do |continuity|
+          %td= position(continuity, member).join(" ")
+            
