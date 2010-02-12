@@ -9,6 +9,7 @@
   %p= @stage.description
 
 %section
-  %ul
+  %table
+    %th 
     - @stage.musics.each do |music|
-      %li=music.name
+      %th=music.name 

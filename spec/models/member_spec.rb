@@ -1,16 +1,35 @@
+# -*- coding: utf-8 -*-
 require 'spec_helper'
 
 describe Member do
-  before(:each) do
-    @valid_attributes = {
-      :first_name => "MyString",
-      :last_name => "MyString",
-      :email => "MyString",
-      :phone => "MyString"
-    }
+  before(:all) do
+    Member.blueprint { }
+    Continuity.blueprint { }
+    continuity = Continuity.make
+    Position.blueprint do 
+      member
+      continuity {continuity}
+    end
+    3.times { Position.make }
+    3.times { Position.make({:continuity => Continuity.make }) }
+    member = Member.make
+    3.times { Position.make({:member => member }) }
   end
 
-  it "should create a new instance given valid attributes" do
-    Member.create!(@valid_attributes)
+  context ".cast" do 
+    it "出演者が取得できること" do 
+      members = Member.cast(1)
+      members.should have(4).items
+    end
+
+    it "出演者がない場合はからになること" do 
+      members = Member.cast(100)
+      members.should be_empty
+    end
+
+    it "出演者が複数コンテにまたがって取得できること" do 
+      members = Member.cast([1,2])
+      members.should have(5).items
+    end
   end
 end
